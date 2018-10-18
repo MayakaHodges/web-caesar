@@ -18,19 +18,19 @@ form_html = """
 <html>
     <head>
         <style>
-            form {
+            form {{
                 background-color: #eee;
                 padding: 20px;
                 margin: 0 auto;
                 width: 540px;
                 font: 16px sans-serif;
                 border-radius: 10px;
-            }
-            textarea {
+            }}
+            textarea {{
                 margin: 10px 0;
                 width: 540px;
                 height: 120px;
-            }
+            }}
         </style>
     </head>
     <body>
@@ -44,8 +44,7 @@ form_html = """
             <!-- TO DO: The input element has the default value of 0. -->
             <input type="text" name="rot" value="0"/>
         </label>
-        <textarea type="text" name="text">
-        </textarea>
+        <textarea type="text" name="text">{2}</textarea>
         <!-- TO DO: Has a submit button.-->
         <input type="submit" value="Submit"/>
       </form>
@@ -54,13 +53,13 @@ form_html = """
 """
 
 #@app.route("/"): this is a decorator that creates a mapping between the path - in this case the root, or "/", and the function that we're about to define
-@app.route("/")
+@app.route('/')
 #def index():: Ah, familiar ground! We define index, a function of zero variables
 def index():
     #return "Hello World": Our function returns a string literal.
     #return "Hello World"
     #return the html form
-    return form_html
+    return form_html.format('','','')
 
 # Add an @app.route decorator to configure the function to receive requests at the root path "/",
 # and with methods=['POST'].
@@ -77,7 +76,7 @@ def encrypt():
     rot = int(rot)
     rotated_string = rotate_string(text, rot)
 
-    return "<h1>" + rotated_string + "</h1>"
+    return form_html.format('','', rotated_string)
 
 #app.run(): Pass control to the Flask object.
 # The run function loops forever and never returns, so put it last.
